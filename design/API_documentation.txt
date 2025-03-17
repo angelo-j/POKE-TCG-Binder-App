@@ -1,0 +1,126 @@
+- Login:
+    POST {{baseUrl}}/api/auth/login
+    Body:  {
+            "username": "user",
+            "password": "pass"
+           }
+
+- Register User:
+    POST {{baseUrl}}/api/auth/register
+    Body: {
+            "username": "user",
+            "password": "pass",
+            "confirmPassword": "pass",
+            "role": "ROLE_USER" -OR- "ROLE_ADMIN"
+          }
+
+- Get All Users:
+    GET {{baseUrl}}/api/users
+    Auth: ADMIN
+
+- Get User by ID:
+    GET {{baseUrl}}/api/users/{userId}
+    Auth: USER or ADMIN
+
+- Get Current User:
+    GET {{baseUrl}}/api/users/me
+    Auth: USER or ADMIN
+
+- Get User Money:
+    GET {{baseUrl}}/api/users/{userId}/money
+    Auth: USER or ADMIN
+
+- Update User Money:
+    PUT {{baseUrl}}/api/users/{userId}/money
+    Body: (Decimal)
+          {
+            150.00
+          }
+    Auth: USER or ADMIN
+
+- Delete User:
+    DELETE {{baseUrl}}/api/users/{userId}
+    Auth: ADMIN
+
+- Create a binder:
+    POST {{baseUrl}}/api/binders
+    Body: {
+           "name": "binder name",
+           "userId": {userId}
+          }
+    Auth: USER or ADMIN
+
+- Create Binder for User:
+    POST {{baseUrl}}/api/binders/user/{username}/binders
+    Body: {
+            "name": "binder name"
+          }
+    Auth: ADMIN
+
+- Get All Binders:
+    GET {{baseUrl}}/api/binders
+    Auth: ADMIN
+
+- Get Current User's Binders:
+    GET {{baseUrl}}/api/binders/mine
+    Auth: USER or ADMIN
+
+- Get Binder by ID:
+    GET {{baseUrl}}/api/binders/{binderId}
+    Auth: USER or ADMIN
+
+- Get Binders by User ID:
+    GET {{baseUrl}}/api/binders/user/{userId}
+    Auth: USER or ADMIN
+
+- Get Cards in Binder:
+    GET {{baseUrl}}/api/binders/{binderId}/cards
+    Auth: USER or ADMIN
+
+- Rename Binder:
+    PUT {{baseUrl}}/api/binders/{binderId}
+    Body: {
+           "name": "new binder name"
+          }
+    Auth: ADMIN
+
+- Delete Binder:
+    DELETE {{baseUrl}}/api/binders/{binderId}
+    Auth: USER or ADMIN
+
+- Add Card to Binder:
+    POST {{baseUrl}}/api/binders/{binderId}/cards
+    Body: { "cardId": "id" }
+    (One at a time)
+    Auth: USER or ADMIN
+
+- Remove Card from Binder:
+    DELETE {{baseUrl}}/api/binders/{binderId}/cards/{cardId}
+    (One at a time)
+    Auth: USER or ADMIN
+
+- Buy Card to a Binder:
+    POST {{baseUrl}}/api/binders/buyCard
+    BODY: {
+            "binderId": 1,
+            "cardId": "base3-5",
+            "price": 2.82,
+            "userId": 1,
+            "preferredPriceKey": "normal"
+          }
+    (One at a time)
+    Auth: USER or ADMIN
+
+- Sell Card from a Binder:
+    POST {{baseUrl}}/api/binders/{binderId}/sell/{cardId}
+    (One at a time)
+    Auth: USER or ADMIN
+
+- Search Cards:
+    GET {{baseUrl}}/api/cards/search?query={query}
+    Auth: None
+
+- Get Card Details by Card ID:
+    GET {{baseUrl}}/api/cards/{cardId}
+    Auth: None
+

@@ -1,0 +1,12 @@
+com.pokebinderapp
+com.pokebinderapp.apidoc
+com.pokebinderapp.config
+com.pokebinderapp.controller
+com.pokebinderapp.dao
+com.pokebinderapp.exception
+com.pokebinderapp.model
+com.pokebinderapp.model.dto
+com.pokebinderapp.security
+com.pokebinderapp.security.jwt
+com.pokebinderapp.services
+com.pokebinderapp.util

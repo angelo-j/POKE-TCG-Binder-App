@@ -1,0 +1,748 @@
+{
+	"info": {
+		"_postman_id": "83ff230f-bb84-4284-8978-d171749ecf03",
+		"name": "PokemonTCG API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42752912"
+	},
+	"item": [
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "Search Card",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/cards/search?query=mewtwo",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"cards",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "mewtwo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Details by Card ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/cards/sm75-6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"cards",
+								"sm75-6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"jordan\",\r\n    \"password\": \"jordan\",\r\n    \"confirmPassword\": \"jordan\",\r\n    \"role\": \"ROLE_ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Money",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjU1NjM1fQ.tja609CPEsdCWksmVlMJqFMYPua8tllujq64ayhKY_sZJRqA6T6y2rUJSJ23F0g2bhc4CBhm_Dr78mI1HYvNdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "1000.00",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/2/money",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"2",
+								"money"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JkYW4iLCJhdXRoIjoiUk9MRV9BRE1JTiIsImV4cCI6MTc0MjI0MTcwNn0.yZO8s6OiEjjwPKRp14qs-zZx1aPRcSm8SweVIAphriUfi_uDWdXT_kgfsTNLz-_x4NGvFH67e26FxhEKSM9Bjw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjUyMzE5fQ.2_uYibfyYZLv5j4_dX5ybu9-RcHLmr3IiJlj_9bWrv4jt2PPy-P1Rgw9rX3HStAROjNhuSEbQXepCdfUjYRLFQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JkYW4iLCJhdXRoIjoiUk9MRV9BRE1JTiIsImV4cCI6MTc0MjI1MTE0MH0.KlcE-X_ihq6ud_x3kNQ0qGDs1OUOSWsmV_6BokLtGHUu5IBPc22FEE_OSVqj30EGPbFhw4RsFiVtiQBsrl0jxQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjU1NjM1fQ.tja609CPEsdCWksmVlMJqFMYPua8tllujq64ayhKY_sZJRqA6T6y2rUJSJ23F0g2bhc4CBhm_Dr78mI1HYvNdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Money",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JkYW4iLCJhdXRoIjoiUk9MRV9BRE1JTiIsImV4cCI6MTc0MjI0MTcwNn0.yZO8s6OiEjjwPKRp14qs-zZx1aPRcSm8SweVIAphriUfi_uDWdXT_kgfsTNLz-_x4NGvFH67e26FxhEKSM9Bjw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/3/money",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"3",
+								"money"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Binders",
+			"item": [
+				{
+					"name": "Binder Actions",
+					"item": [
+						{
+							"name": "Create Binder",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjU1NjM1fQ.tja609CPEsdCWksmVlMJqFMYPua8tllujq64ayhKY_sZJRqA6T6y2rUJSJ23F0g2bhc4CBhm_Dr78mI1HYvNdw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Jordan's Binder\",\r\n    \"userId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/binders",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Binder for User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JkYW4iLCJhdXRoIjoiUk9MRV9BRE1JTiIsImV4cCI6MTc0MjA0NDQyNH0.ggFnBsooCI5z447rlDOhRhFhKz9ggqCsezoSn18cIRcG2jGuwVn_tsTKawjXjPPNeBSXjurhpj5-31FdhAzM-Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"TEST CREATE BINDER FOR USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/binders/user/user/binders",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders",
+										"user",
+										"user",
+										"binders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rename Binder",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjU1NjM1fQ.tja609CPEsdCWksmVlMJqFMYPua8tllujq64ayhKY_sZJRqA6T6y2rUJSJ23F0g2bhc4CBhm_Dr78mI1HYvNdw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"TEST RENAME BINDER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/binders/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Binder",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjU1NjM1fQ.tja609CPEsdCWksmVlMJqFMYPua8tllujq64ayhKY_sZJRqA6T6y2rUJSJ23F0g2bhc4CBhm_Dr78mI1HYvNdw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/binders/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Binders (No Cards)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjUzMzA1fQ.axL1VZKj4k8IpXU2JpshwKFH4siuOxNtgCuBxFIxVH3wWKxeXHrcxfV1uJXsHhdLIx2swg_UMqT5HdMR9bGbyQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/binders",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Current User's Binders",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjUzMzA1fQ.axL1VZKj4k8IpXU2JpshwKFH4siuOxNtgCuBxFIxVH3wWKxeXHrcxfV1uJXsHhdLIx2swg_UMqT5HdMR9bGbyQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/binders/mine",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders",
+										"mine"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Binders by User ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjUzMzA1fQ.axL1VZKj4k8IpXU2JpshwKFH4siuOxNtgCuBxFIxVH3wWKxeXHrcxfV1uJXsHhdLIx2swg_UMqT5HdMR9bGbyQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/binders/user/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders",
+										"user",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Binder by ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JkYW4iLCJhdXRoIjoiUk9MRV9BRE1JTiIsImV4cCI6MTc0MjI1MTE0MH0.KlcE-X_ihq6ud_x3kNQ0qGDs1OUOSWsmV_6BokLtGHUu5IBPc22FEE_OSVqj30EGPbFhw4RsFiVtiQBsrl0jxQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/binders/3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Cards in Binder",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JkYW4iLCJhdXRoIjoiUk9MRV9BRE1JTiIsImV4cCI6MTc0MjI1MTE0MH0.KlcE-X_ihq6ud_x3kNQ0qGDs1OUOSWsmV_6BokLtGHUu5IBPc22FEE_OSVqj30EGPbFhw4RsFiVtiQBsrl0jxQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/binders/2/cards",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders",
+										"2",
+										"cards"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Card Management",
+					"item": [
+						{
+							"name": "Add to Binder by Card ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjU1NjM1fQ.tja609CPEsdCWksmVlMJqFMYPua8tllujq64ayhKY_sZJRqA6T6y2rUJSJ23F0g2bhc4CBhm_Dr78mI1HYvNdw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardId\": \"basep-3\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/binders/2/cards",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders",
+										"2",
+										"cards"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buy to Binder by Card ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjU1NjM1fQ.tja609CPEsdCWksmVlMJqFMYPua8tllujq64ayhKY_sZJRqA6T6y2rUJSJ23F0g2bhc4CBhm_Dr78mI1HYvNdw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"binderId\": 3,\r\n    \"cardId\": \"sm75-6\",\r\n    \"price\": 1.62,\r\n    \"userId\": 2,\r\n    \"preferredPriceKey\": \"normal\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/binders/buyCard",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders",
+										"buyCard"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove from Binder by Card ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjU1NjM1fQ.tja609CPEsdCWksmVlMJqFMYPua8tllujq64ayhKY_sZJRqA6T6y2rUJSJ23F0g2bhc4CBhm_Dr78mI1HYvNdw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/binders/2/cards/basep-3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders",
+										"2",
+										"cards",
+										"basep-3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sell from Binder by Card ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzQyMjU1NjM1fQ.tja609CPEsdCWksmVlMJqFMYPua8tllujq64ayhKY_sZJRqA6T6y2rUJSJ23F0g2bhc4CBhm_Dr78mI1HYvNdw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/binders/2/sell/basep-3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"binders",
+										"2",
+										"sell",
+										"basep-3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

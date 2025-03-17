@@ -1,0 +1,13 @@
+As a user, I can search for Pokemon cards by name.
+As a user, I can get Pokemon card details by card ID.
+As an authenticated user, I can create and name a binder to organize my Pokemon cards.
+As an authenticated user, I can add a card by ID to my binder to track and manage my collection.
+As an authenticated user, I can remove a card from my binder.
+As an authenticated user, I can buy a card to my binder using my in-app currency
+As an authenticated user, I can sell a card from my binder to receive in-app currency.
+As an authenticated user, I can delete my binder.
+As an admin, I can do any of the above for any user and any binder.
+As an admin, I can view all users.
+As an admin, I can view all binders.
+As an admin, I can rename a binder.
+As an admin, I can delete a user.
