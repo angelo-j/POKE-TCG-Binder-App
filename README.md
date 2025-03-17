@@ -31,7 +31,7 @@ Authentication is required for actions beyond searching, such as creating binder
 #### 📁 binder
 - `binder_id` 🆔 (Primary Key)
 - `name` 🏷️
-- `userId` 🔗 (Foreign Key referencing Users)
+- `userId` 🔗 (Foreign Key referencing users)
 
 #### 🎴 binder_cards
 - `id` 🆔 (Primary Key)
