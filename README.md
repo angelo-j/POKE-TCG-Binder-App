@@ -26,17 +26,17 @@ This is a web application that integrates with the Pokémon TCG API to allow use
 #### binder
 - `binderId` (Primary Key)
 - `name`
-- `userId` (Foreign Key referencing Users, on delete cascade)
+- `userId` (Foreign Key referencing Users)
 
 #### binder_cards
 - `id` (Unique ID for each entry)
-- `binder_id` INTEGER (Foreign Key referencing binder, on delete cascade)
+- `binder_id` (Foreign Key referencing binder)
 - `card_id`
 - `name`
 - `small_image_url`
 - `large_image_url`
 - `price`
-- `quantity`
+- `quantity` (Increments by one)
 
 ## Key Classes & Interfaces
 ### Models
