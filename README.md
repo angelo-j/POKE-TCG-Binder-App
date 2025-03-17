@@ -20,7 +20,7 @@ Authentication is required for actions beyond searching, such as creating binder
 - **Admin Features 👀**: Admins can delete any user or binder, as well as access any of the other normal user functions.
 
 ## 💾 [Database Schema](database/pokemonTcgSQL.sql)
-### 🗂️ Tables:
+### 📊 Tables:
 #### 👤 users
 - `user_id`  🆔 (Primary Key)
 - `username` 🏷️
