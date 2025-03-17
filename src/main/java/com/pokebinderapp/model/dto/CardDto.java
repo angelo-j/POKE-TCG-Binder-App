@@ -8,6 +8,8 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CardDto {
 
+    // todo: separate nested classes for better responses
+
     @JsonProperty("id")
     private String cardId;
     private String name;

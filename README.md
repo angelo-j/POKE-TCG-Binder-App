@@ -84,9 +84,9 @@ The Pokémon TCG API is used to fetch complete real-time card details when neces
    ```sh
    git clone https://github.com/your-repo/pokemon-tcg-webapp.git
    ```
-2. **Configure the PostgreSQL database:**
+2. **Configure the PostgreSQL database using the provided SQL.**
 3. **Run the backend server.**
-4. **Access the API and start testing the features.**
+4. **Access the API (Postman collection provided) and start testing the features.**
 
 ## Technologies Used
 - **Java**
