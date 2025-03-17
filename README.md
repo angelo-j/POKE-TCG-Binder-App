@@ -9,6 +9,7 @@ This is a web application that integrates with the Pokémon TCG API to allow use
 - **Search for Cards**: Available to all users without authentication.
 - **User Authentication**: Required for creating binders and managing cards.
 - **Binders**: Users can create, name, and manage their personal card collections.
+- **Database Storage**: Deserializes JSON results and extracts essential fields when storing cards in binders.
 - **Trading System**: Users can sell or swap cards between binders.
 - **Pricing System**: Card prices are fetched from the Pokémon TCG API.
 - **Admin Features**: Admins can delete any user or binder, as well as access any of the other normal user functions.
