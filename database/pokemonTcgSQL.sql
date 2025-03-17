@@ -8,22 +8,22 @@ DROP TABLE IF EXISTS users CASCADE;
 
 -- Create users table
 CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password_hash VARCHAR(200) NOT NULL,
-    role VARCHAR(50) NOT NULL,
-    money NUMERIC(10, 2) DEFAULT 100.00 NOT NULL
+    user_id SERIAL PRIMARY KEY,                                             -- Unique ID for each entry
+    username VARCHAR(50) NOT NULL UNIQUE,                                   -- Unique username
+    password_hash VARCHAR(200) NOT NULL,                                    -- Hashed password
+    role VARCHAR(50) NOT NULL,                                              -- ROLE_USER or ROLE_ADMIN
+    money NUMERIC(10, 2) DEFAULT 100.00 NOT NULL                            -- Decimal value
 );
 
 -- Create binder table
 CREATE TABLE binder (
-    binder_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    user_id INTEGER NOT NULL,
+    binder_id SERIAL PRIMARY KEY,                                           -- Unique ID for each entry
+    name VARCHAR(100) NOT NULL,                                             -- Binder name
+    user_id INTEGER NOT NULL,                                               -- Foreign key to users
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
--- Create binder_cards table with quantity column and unique ID
+-- Create binder_cards table
 CREATE TABLE binder_cards (
     id SERIAL PRIMARY KEY,                                                  -- Unique ID for each entry
     binder_id INTEGER NOT NULL,                                             -- Foreign key to binder
