@@ -1,4 +1,4 @@
-# Pokemon TCG Web App
+# Pokémon TCG Binder-Building Web App
 
 ## Overview
 This is a web application that integrates with the Pokémon TCG API to allow users to search for cards, manage personal binders, and conduct trades. Authentication is required for actions beyond searching, such as creating binders, adding cards, and trading.
@@ -8,8 +8,8 @@ This is a web application that integrates with the Pokémon TCG API to allow use
 - **User Authentication**: Required for creating binders and managing cards.
 - **Binders**: Users can create, name, and manage their personal card collections.
 - **Trading System**: Users can sell or swap cards between binders.
-- **Pricing System**: Card prices are fetched from the Pokémon TCG API, defaulting to `0.00` if unavailable.
-- **Admin Features**: Admins can delete any user or binder.
+- **Pricing System**: Card prices are fetched from the Pokémon TCG API.
+- **Admin Features**: Admins can delete any user or binder, as well as access any of the other normal user functions.
 
 ## Database Schema
 ### Tables:
@@ -46,10 +46,11 @@ This is a web application that integrates with the Pokémon TCG API to allow use
 - `UserDao`
 
 ## API Integration
-The Pokémon TCG API is used to fetch real-time card details. Only essential information (image, Pokedex number, name, price) is stored in binders to minimize database size.
+The Pokémon TCG API is used to fetch real-time card details. Only essential information (image, Pokédex number, name, price) is stored in binders to minimize database size.
 
 ## Future Enhancements
-- **Pagination**: To improve user experience when browsing large sets of cards.
+- **Repaired Testing**: To bring test classes up-to-speed with recent modifications.
+- **Pagination Improvements**: To improve user experience when browsing large sets of cards.
 - **Frontend Development**: A user-friendly UI for managing binders and trades.
 - **Improved Trade System**: Possibly allowing auctions or direct swaps.
 
@@ -58,7 +59,7 @@ The Pokémon TCG API is used to fetch real-time card details. Only essential inf
    ```sh
    git clone https://github.com/your-repo/pokemon-tcg-webapp.git
    ```
-2. **Configure the PostgreSQL database** `m2_final_project`.
+2. **Configure the PostgreSQL database** `pokebinderapp`.
 3. **Run the backend server.**
 4. **Access the API and start testing the features.**
 
