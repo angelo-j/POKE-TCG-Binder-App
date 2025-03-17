@@ -1,6 +1,6 @@
 # Pokémon TCG Binder-Building Web App
 
-![Example Binder View in JSON](docs/screenshots/Binder%20View.png)
+![Example Postman View With Requests](docs/screenshots/Postman%20View.png)
 
 ## Overview
 This is a web application that integrates with the Pokémon TCG API to allow users to search for cards, manage personal binders, and conduct trades. Authentication is required for actions beyond searching, such as creating binders, adding cards, and trading.
@@ -67,6 +67,8 @@ This is a web application that integrates with the Pokémon TCG API to allow use
 
 ### Other
 - `CardMapper`
+
+![Example Binder View in JSON](docs/screenshots/Binder%20View.png)
 
 ## API Integration
 The Pokémon TCG API is used to fetch complete real-time card details when necessary. The database only stores essential card attributes (ID, name, image URLs, price) to optimize storage and performance.
