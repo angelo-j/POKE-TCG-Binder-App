@@ -69,7 +69,7 @@ This is a web application that integrates with the Pokémon TCG API to allow use
 - `CardMapper`
 
 ## API Integration
-The Pokémon TCG API is used to fetch real-time card details. Only essential information (image, Pokédex number, name, price) is stored in binders to minimize database size.
+The Pokémon TCG API is used to fetch complete real-time card details when necessary. The database only stores essential card attributes (ID, name, image URLs, price) to optimize storage and performance.
 
 ## Future Enhancements
 - **Repaired Testing**: To bring test classes up-to-speed with recent modifications.
