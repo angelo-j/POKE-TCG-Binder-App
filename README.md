@@ -3,7 +3,7 @@
 ![Example Postman View With Requests](docs/screenshots/Postman%20View.png)
 
 ## Overview
-This is a web application that integrates with the Pokémon TCG API to allow users to search for cards, manage personal binders, and conduct trades. Authentication is required for actions beyond searching, such as creating binders, adding cards, and trading.
+This is a web application that integrates with the [Pokémon TCG API](https://pokemontcg.io/) to allow users to search for cards, manage personal binders, and conduct trades. Authentication is required for actions beyond searching, such as creating binders, adding cards, and trading.
 
 ## Features
 - **Search for Cards**: Available to all users without authentication.
@@ -71,7 +71,7 @@ This is a web application that integrates with the Pokémon TCG API to allow use
 ![Example Binder View in JSON](docs/screenshots/Binder%20View.png)
 
 ## API Integration
-The [Pokémon TCG API](https://pokemontcg.io/) is used to fetch complete real-time card details when necessary. The database only stores essential card attributes (ID, name, image URLs, price) to optimize storage and performance.
+The Pokémon TCG API is used to fetch complete real-time card details when necessary. The database only stores essential card attributes (ID, name, image URLs, price) to optimize storage and performance.
 
 ## Future Enhancements
 - **Repaired Testing**: To bring test classes up-to-speed with recent modifications.
