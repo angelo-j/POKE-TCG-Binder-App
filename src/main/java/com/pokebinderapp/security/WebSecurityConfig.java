@@ -49,8 +49,10 @@ public class WebSecurityConfig {
                 "/", // Allow homepage
                 "/index.html", // Allow direct access to index.html
                 "/static/**", // Allow static files
-                "/css/**", "/js/**", "/images/**" // If you have assets
+                "/css/**", "/js/**", "/images/**" // For future assets
         );
+
+        // return (web) -> web.ignoring().requestMatchers(HttpMethod.OPTIONS, "/**");
     }
 
 
