@@ -18,6 +18,8 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Objects;
 
+import static org.mockito.Mockito.mock;
+
 @ComponentScan(basePackages = {"com.techelevator.services", "com.techelevator.config"})
 @Configuration
 public class TestingDatabaseConfig {
@@ -92,14 +94,19 @@ public class TestingDatabaseConfig {
     }
 
     @Bean
-    public JdbcCardDao cardDao(JdbcTemplate jdbcTemplate, PokemonApiService pokemonApiService) {
-        return new JdbcCardDao(jdbcTemplate, pokemonApiService);
-    }
-
-    @Bean
     public JdbcBinderDao binderDao(JdbcTemplate jdbcTemplate, JdbcCardDao cardDao) {
         JdbcBinderDao binderDao = new JdbcBinderDao(jdbcTemplate, cardDao);
         return binderDao;
+    }
+
+    @Bean
+    public PokemonApiService pokemonApiService() {
+        return mock(PokemonApiService.class);
+    }
+
+    @Bean
+    public JdbcCardDao cardDao(JdbcTemplate jdbcTemplate, PokemonApiService pokemonApiService) {
+        return new JdbcCardDao(jdbcTemplate, pokemonApiService);
     }
 
     @PreDestroy
