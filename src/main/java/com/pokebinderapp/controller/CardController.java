@@ -35,7 +35,7 @@ public class CardController {
 
         try {
             // Fetch all cards
-            List<CardDto> allCards = pokemonService.searchCardsDetailed(query);
+            List<CardDto> allCards = pokemonService.searchCards(query);
 
             if (allCards == null || allCards.isEmpty()) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No cards found for query: " + query);

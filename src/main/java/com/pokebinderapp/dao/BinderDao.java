@@ -1,7 +1,6 @@
 package com.pokebinderapp.dao;
 
 import com.pokebinderapp.model.Binder;
-
 import java.util.List;
 
 public interface BinderDao {
@@ -16,4 +15,5 @@ public interface BinderDao {
 
     boolean updateBinderName(int binderId, String newName);
 
-    boolean deleteBinder(int binderId);}
+    boolean deleteBinder(int binderId);
+}

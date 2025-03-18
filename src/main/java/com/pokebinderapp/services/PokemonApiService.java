@@ -93,13 +93,4 @@ public class PokemonApiService implements PokemonServiceInterface {
         }
         return null;
     }
-
-    /**
-     * Retrieves a detailed list of CardDto objects matching the query.
-     * This method delegates to searchCards(), but you can add extra processing if needed.
-     */
-    @Override
-    public List<CardDto> searchCardsDetailed(String query) {
-        return searchCards(query);
-    }
 }

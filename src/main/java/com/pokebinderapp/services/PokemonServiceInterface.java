@@ -10,6 +10,4 @@ public interface PokemonServiceInterface {
 
     CardDto getCardDetails(String cardId);
 
-    List<CardDto> searchCardsDetailed(String query);
-
 }

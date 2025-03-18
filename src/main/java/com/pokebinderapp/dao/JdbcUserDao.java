@@ -2,6 +2,7 @@ package com.pokebinderapp.dao;
 
 import com.pokebinderapp.model.User;
 import com.pokebinderapp.exception.DaoException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,10 +32,13 @@ public class JdbcUserDao implements UserDao {
         String sql = "SELECT * FROM users WHERE user_id = ?";
         try {
             return jdbcTemplate.queryForObject(sql, this::mapRowToUser, userId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;  // Return null if no user is found
         } catch (Exception e) {
             throw new DaoException("Error getting user by ID", e);
         }
     }
+
 
     @Override
     public int findIdByUsername(String username) {
@@ -83,10 +87,17 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public User createUser(User newUser) {
+        if (newUser.getUsername() == null || newUser.getUsername().isBlank()) {
+            throw new DaoException("Username cannot be null or empty");
+        }
+        if (newUser.getHashedPassword() == null || newUser.getHashedPassword().isBlank()) {
+            throw new DaoException("Password cannot be null or empty");
+        }
+
         // Instantiate the encoder
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        // Get the raw password and then hash it
+        // Hash the raw password
         String rawPassword = newUser.getHashedPassword();
         String hashedPassword = passwordEncoder.encode(rawPassword);
         newUser.setHashedPassword(hashedPassword);
@@ -106,11 +117,12 @@ public class JdbcUserDao implements UserDao {
             int newId = jdbcTemplate.queryForObject(sql, Integer.class, params);
             newUser.setId(newId);
             return newUser;
+        } catch (DuplicateKeyException e) {
+            throw new DaoException("Username already exists", e);
         } catch (Exception e) {
             throw new DaoException("Error creating user", e);
         }
     }
-
 
 
     @Override

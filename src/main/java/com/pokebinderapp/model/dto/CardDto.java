@@ -31,7 +31,7 @@ public class CardDto {
     private Map<String, String> legalities;
     private Map<String, String> images;
 
-    // ✅ These reference separate DTO classes (no nested duplicates)
+    // These reference separate DTO classes
     private TcgplayerDto tcgplayer;
     private CardmarketDto cardmarket;
 

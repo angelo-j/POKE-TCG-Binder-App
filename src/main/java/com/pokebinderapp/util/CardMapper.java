@@ -30,18 +30,31 @@ public class CardMapper {
         BigDecimal cardMarketPrice = extractCardmarketPrice(dto.getCardmarket());
         card.setPrice(!tcgPrice.equals(BigDecimal.ZERO) ? tcgPrice : cardMarketPrice);
 
-        // Set both image URLs if available
-        if (dto.getImages() != null) {
-            String largeImageUrl = dto.getImages().get("large");
-            String smallImageUrl = dto.getImages().get("small");
-            if (smallImageUrl == null || smallImageUrl.trim().isEmpty()) {
-                smallImageUrl = largeImageUrl;
-            }
-            card.setSmallImageUrl(smallImageUrl);
-            card.setLargeImageUrl(largeImageUrl);
+        // Ensure image URLs are not null
+        String largeImageUrl = (dto.getImages() != null) ? dto.getImages().get("large") : null;
+        String smallImageUrl = (dto.getImages() != null) ? dto.getImages().get("small") : null;
+
+        if (smallImageUrl == null || smallImageUrl.trim().isEmpty()) {
+            smallImageUrl = largeImageUrl;
         }
+        if (largeImageUrl == null || largeImageUrl.trim().isEmpty()) {
+            largeImageUrl = smallImageUrl;
+        }
+
+        // Final fallback: Set a default image if both are null
+        if (smallImageUrl == null) {
+            smallImageUrl = "https://images.pokemontcg.io/sm115/13.png"; // Replace with a default image
+        }
+        if (largeImageUrl == null) {
+            largeImageUrl = "https://images.pokemontcg.io/sm115/13_hires.png"; // Replace with a default image
+        }
+
+        card.setSmallImageUrl(smallImageUrl);
+        card.setLargeImageUrl(largeImageUrl);
+
         return card;
     }
+
 
     // Preferred TCGPlayer extraction logic
     public static BigDecimal extractPreferredTcgPrice(TcgplayerDto tcgplayer, String preferredKey) {
@@ -124,8 +137,4 @@ public class CardMapper {
         return card;
     }
 
-    // For search/get endpoints: returns the detailed CardDto as is.
-    public static CardDto mapCardDtoToDetailedDto(CardDto dto) {
-        return dto;
-    }
 }

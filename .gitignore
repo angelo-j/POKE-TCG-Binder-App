@@ -35,7 +35,12 @@ node_modules
 /dist
 
 .env
+# Ignore database dumps but keep test schema
 *.sql
+!test-schema.sql
+!test-data.sql
+!migrations/*.sql  # If using Flyway or Liquibase
+
 
 # Eclipse
 .classpath

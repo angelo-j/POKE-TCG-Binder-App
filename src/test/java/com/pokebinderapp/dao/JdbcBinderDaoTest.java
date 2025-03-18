@@ -1,9 +1,9 @@
 package com.pokebinderapp.dao;
 
 import com.pokebinderapp.model.Binder;
+import com.pokebinderapp.model.Card;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
@@ -11,87 +11,69 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JdbcBinderDaoTest extends BaseDaoTest {
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
     private JdbcBinderDao binderDao;
+    private JdbcUserDao userDao;
+    private JdbcCardDao cardDao;
 
     @BeforeEach
     public void setup() {
-        String insertUserSql = "INSERT INTO users (username, password_hash, role, money) VALUES ('testuser', 'password', 'ROLE_USER', 100.00)";
-        jdbcTemplate.update(insertUserSql);
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        this.cardDao = new JdbcCardDao(jdbcTemplate, null);
+        this.binderDao = new JdbcBinderDao(jdbcTemplate, cardDao);
+        this.userDao = new JdbcUserDao(jdbcTemplate);
     }
 
     @Test
-    void createBinder_ShouldReturnBinderWithId() {
-        // Arrange
-        String insertSql = "INSERT INTO binder (name, user_id) VALUES ('Test Binder', 1)";
-        jdbcTemplate.update(insertSql);
-
-        // Act
-        Binder binder = binderDao.getBinderById(1);
-
-        // Assert
-        assertNotNull(binder);
-        assertEquals(1, binder.getBinderId());
-        assertEquals("Test Binder", binder.getName());
-
-        // Clean up
-        jdbcTemplate.update("DELETE FROM binder WHERE binder_id = 1");
-    }
-
-    @Test
-    void getAllBinders_ShouldReturnListOfBinders() {
-        // Arrange
-        jdbcTemplate.update("INSERT INTO binder (name, user_id) VALUES ('Test Binder 1', 1)");
-        jdbcTemplate.update("INSERT INTO binder (name, user_id) VALUES ('Test Binder 2', 1)");
-
-        // Act
-        List<Binder> binders = binderDao.getAllBinders();
-
-        // Assert
-        assertNotNull(binders);
-        assertEquals(2, binders.size());
-
-        // Clean up
-        jdbcTemplate.update("DELETE FROM binder WHERE name LIKE 'Test Binder%'");
-    }
-
-    @Test
-    void updateBinderName_ShouldUpdateName() {
-        // Arrange
+    public void createBinder_ShouldReturnBinderWithId() {
         Binder binder = new Binder();
-        binder.setName("Old Binder Name");
+        binder.setName("Test Binder");
+        binder.setUserId(1);
+
+        Binder createdBinder = binderDao.createBinder(binder);
+
+        assertNotNull(createdBinder);
+        assertTrue(createdBinder.getBinderId() > 0);
+    }
+
+    @Test
+    public void getBindersByUserId_ShouldReturnList() {
+        Binder binder = new Binder();
+        binder.setName("User Binder");
+        binder.setUserId(1);
+        binderDao.createBinder(binder);
+
+        List<Binder> binders = binderDao.getBindersByUserId(1);
+        assertFalse(binders.isEmpty());
+
+        // Check if any of the binders match the expected name
+        boolean found = binders.stream().anyMatch(b -> "User Binder".equals(b.getName()));
+        assertTrue(found, "Expected to find 'User Binder' in the list of binders for user 1.");
+    }
+
+    @Test
+    public void updateBinderName_ShouldUpdateSuccessfully() {
+        Binder binder = new Binder();
+        binder.setName("Old Name");
         binder.setUserId(1);
         Binder createdBinder = binderDao.createBinder(binder);
 
-        // Act
-        boolean updated = binderDao.updateBinderName(createdBinder.getBinderId(), "New Binder Name");
+        boolean updated = binderDao.updateBinderName(createdBinder.getBinderId(), "New Name");
+
+        assertTrue(updated);
         Binder updatedBinder = binderDao.getBinderById(createdBinder.getBinderId());
-
-        // Assert
-        assertTrue(updated, "Binder name should be updated");
-        assertNotNull(updatedBinder, "Updated binder should not be null");
-        assertEquals("New Binder Name", updatedBinder.getName(), "Binder name should be updated to the new value");
+        assertEquals("New Name", updatedBinder.getName());
     }
 
     @Test
-    void deleteBinder_ShouldRemoveBinder() {
-        // Arrange
+    public void deleteBinder_ShouldRemoveBinder() {
         Binder binder = new Binder();
-        binder.setName("Binder to Delete");
+        binder.setName("Binder To Delete");
         binder.setUserId(1);
         Binder createdBinder = binderDao.createBinder(binder);
 
-        // Act
         boolean deleted = binderDao.deleteBinder(createdBinder.getBinderId());
-        Binder retrievedBinder = binderDao.getBinderById(createdBinder.getBinderId());
 
-        // Assert
-        assertTrue(deleted, "Binder should be deleted successfully");
-        assertNull(retrievedBinder, "After deletion, getBinderById should return null");
+        assertTrue(deleted);
+        assertNull(binderDao.getBinderById(createdBinder.getBinderId()));
     }
-
 }

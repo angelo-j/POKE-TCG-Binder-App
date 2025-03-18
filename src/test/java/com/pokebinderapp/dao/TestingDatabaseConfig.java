@@ -2,6 +2,7 @@ package com.pokebinderapp.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pokebinderapp.services.PokemonApiService;
+import com.pokebinderapp.services.PokemonServiceInterface;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +21,7 @@ import java.util.Objects;
 
 import static org.mockito.Mockito.mock;
 
-@ComponentScan(basePackages = {"com.techelevator.services", "com.techelevator.config"})
+@ComponentScan(basePackages = {"com.pokebinderapp.services", "com.pokebinderapp.config"})
 @Configuration
 public class TestingDatabaseConfig {
     // To use an existing PostgreSQL database, set the following environment variables.
@@ -30,7 +31,7 @@ public class TestingDatabaseConfig {
     private static final String DB_PORT =
             Objects.requireNonNullElse(System.getenv("DB_PORT"), "5432");
     private static final String DB_NAME =
-            Objects.requireNonNullElse(System.getenv("DB_NAME"), "m2_final_project_test");
+            Objects.requireNonNullElse(System.getenv("DB_NAME"), "pokebinderapp-test");
     private static final String DB_USERNAME =
             Objects.requireNonNullElse(System.getenv("DB_USERNAME"), "postgres");
     private static final String DB_PASSWORD =
@@ -68,7 +69,7 @@ public class TestingDatabaseConfig {
         dataSource.setUrl(String.format("jdbc:postgresql://%s:%s/%s", DB_HOST, DB_PORT, DB_NAME));
         dataSource.setUsername(DB_USERNAME);
         dataSource.setPassword(DB_PASSWORD);
-        dataSource.setAutoCommit(false); //So we can rollback after each test.
+        dataSource.setAutoCommit(false);
 
         ScriptUtils.executeSqlScript(dataSource.getConnection(), new ClassPathResource("test-schema.sql"));
         ScriptUtils.executeSqlScript(dataSource.getConnection(), new ClassPathResource("test-data.sql"));
@@ -100,14 +101,15 @@ public class TestingDatabaseConfig {
     }
 
     @Bean
-    public PokemonApiService pokemonApiService() {
-        return mock(PokemonApiService.class);
+    public PokemonApiService pokemonApiService(RestTemplate restTemplate, ObjectMapper objectMapper) {
+        return new PokemonApiService();
     }
 
     @Bean
     public JdbcCardDao cardDao(JdbcTemplate jdbcTemplate, PokemonApiService pokemonApiService) {
         return new JdbcCardDao(jdbcTemplate, pokemonApiService);
     }
+
 
     @PreDestroy
     public void cleanup() throws SQLException {

@@ -1,4 +1,5 @@
--- database pokebinderapp
+-- test-schema.sql
+
 BEGIN TRANSACTION;
 
 -- Drop existing tables if they exist
@@ -10,7 +11,7 @@ DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
-    password_hash VARCHAR(200) NOT NULL,
+    password_hash VARCHAR(200) NOT NULL, -- Changed from hashed_password
     role VARCHAR(50) NOT NULL,
     money NUMERIC(10, 2) DEFAULT 100.00 NOT NULL
 );
@@ -35,12 +36,5 @@ CREATE TABLE binder_cards (
     quantity INT DEFAULT 1,
     FOREIGN KEY (binder_id) REFERENCES binder(binder_id) ON DELETE CASCADE
 );
-
--- Insert test users
-
--- Insert test binders
-
--- Insert test binder_cards
-
 
 COMMIT TRANSACTION;

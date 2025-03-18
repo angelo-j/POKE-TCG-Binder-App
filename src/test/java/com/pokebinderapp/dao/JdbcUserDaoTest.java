@@ -12,9 +12,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JdbcUserDaoTest extends BaseDaoTest {
-    protected static final User USER_1 = new User(1, "user1", "$2a$10$tmxuYYg1f5T0eXsTPlq/V.DJUKmRHyFbJ.o.liI1T35TFbjs2xiem", "ROLE_USER");
-    protected static final User USER_2 = new User(2, "user2", "$2a$10$tmxuYYg1f5T0eXsTPlq/V.DJUKmRHyFbJ.o.liI1T35TFbjs2xiem", "ROLE_USER");
-    private static final User USER_3 = new User(3, "user3", "$2a$10$tmxuYYg1f5T0eXsTPlq/V.DJUKmRHyFbJ.o.liI1T35TFbjs2xiem", "ROLE_USER");
+    protected static final User USER_1 = new User(1, "test_user1", "hashedpassword", "ROLE_USER");
+    protected static final User USER_2 = new User(2, "test_user2", "hashedpassword", "ROLE_USER");
+    protected static final User USER_3 = new User(3, "test_user3", "hashedpassword", "ROLE_USER");
 
     private JdbcUserDao dao;
 
@@ -56,7 +56,7 @@ public class JdbcUserDaoTest extends BaseDaoTest {
     }
 
     @Test
-    public void findAll_returns_all_users() {
+    public void getUsers_returns_all_users() {
         List<User> users = dao.getUsers();
 
         assertNotNull(users, "getUsers returned a null list of users");
@@ -113,7 +113,7 @@ public class JdbcUserDaoTest extends BaseDaoTest {
         assertNotNull(actualUser, "Call to getUserById after call to create should return non-null user");
 
         newUser.setId(actualUser.getId());
-        actualUser.setHashedPassword(newUser.getHashedPassword()); // reset password back to unhashed password for testing
+        actualUser.setHashedPassword(newUser.getHashedPassword());
         assertEquals(newUser, actualUser);
     }
 
@@ -146,7 +146,6 @@ public class JdbcUserDaoTest extends BaseDaoTest {
         assertTrue(deleted, "User should be deleted successfully");
         try {
             User retrievedUser = dao.getUserById(createdUser.getId());
-            // Depending on implementation, you might expect null or an exception here
             assertNull(retrievedUser, "Deleted user should not be retrievable");
         } catch (Exception e) {
             // Exception is acceptable if the DAO throws one when a user is not found
