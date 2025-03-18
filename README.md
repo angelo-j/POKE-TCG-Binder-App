@@ -16,12 +16,16 @@ Authentication is required for actions beyond searching, such as creating binder
 - **Spring Security** ensures that protected endpoints require authentication.
 
 ## 🚀 Live Deployment (Koyeb)
-The backend is **deployed on Koyeb**, making it accessible for API calls **without running locally**.
+The backend is **deployed on Koyeb**, making it accessible for API calls **without running locally**.  
+Use the Postman and API documentation in the project to test the backend.
 
 **Base API URL:**
 ```plaintext
 https://sparkling-vivi-angelo-j-code-a0aad5ff.koyeb.app/
 ```
+
+[The Frontend is Coming!](https://sparkling-vivi-angelo-j-code-a0aad5ff.koyeb.app/index.html)
+
 ## ⚡ Features
 - **Search for Cards 🔍**: Available to all users without authentication.
 - **User Authentication 🔒**: Required for creating binders and managing cards.
