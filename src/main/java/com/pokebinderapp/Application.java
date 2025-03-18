@@ -14,6 +14,7 @@ import java.util.Base64;
 public class Application {
 
     // todo: fix tests
+    // todo: allow user to input quantity during trades
 
   public static void main(String[] args) {
       SpringApplication.run(Application.class, args);
