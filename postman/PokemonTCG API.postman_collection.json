@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/cards/search?query=mewtwo",
+							"raw": "{{base_url}}/api/cards/search?query=Starmie",
 							"host": [
 								"{{base_url}}"
 							],
@@ -27,7 +27,7 @@
 							"query": [
 								{
 									"key": "query",
-									"value": "mewtwo"
+									"value": "Starmie"
 								}
 							]
 						}
@@ -65,7 +65,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password\"\r\n}",
+							"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -93,7 +93,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"jordan\",\r\n    \"password\": \"jordan\",\r\n    \"confirmPassword\": \"jordan\",\r\n    \"role\": \"ROLE_ADMIN\"\r\n}",
+							"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"\",\r\n    \"confirmPassword\": \"\",\r\n    \"role\": \"ROLE_USER\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -131,7 +131,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "1000.00",
+							"raw": "{Decimal value}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -139,14 +139,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/users/2/money",
+							"raw": "{{base_url}}/api/users/{user_id}/money",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"2",
+								"{user_id}",
 								"money"
 							]
 						}
@@ -169,14 +169,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/users/3",
+							"raw": "{{base_url}}/api/users/{user_id}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"3"
+								"{user_id}"
 							]
 						}
 					},
@@ -211,7 +211,7 @@
 					"response": []
 				},
 				{
-					"name": "User by ID",
+					"name": "Get User by ID",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -284,14 +284,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/users/3/money",
+							"raw": "{{base_url}}/api/users/{user_id}/money",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"3",
+								"{user_id}",
 								"money"
 							]
 						}
@@ -323,7 +323,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"NEW BINDER\",\r\n    \"userId\": 2\r\n}",
+									"raw": "{\r\n    \"name\": \"My New Binder\",\r\n    \"userId\": \r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -360,7 +360,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"NEW BINDER\"\r\n}",
+									"raw": "{\r\n    \"name\": \"A New Binder For You!\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -368,7 +368,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/binders/user/user/binders",
+									"raw": "{{base_url}}/api/binders/user/{username}/binders",
 									"host": [
 										"{{base_url}}"
 									],
@@ -376,7 +376,7 @@
 										"api",
 										"binders",
 										"user",
-										"user",
+										"{username}",
 										"binders"
 									]
 								}
@@ -400,7 +400,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"NEW BINDER NAME\"\r\n}",
+									"raw": "{\r\n    \"name\": \"A New Binder Name!\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -408,14 +408,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/binders/2",
+									"raw": "{{base_url}}/api/binders/{binder_id}",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"binders",
-										"2"
+										"{binder_id}"
 									]
 								}
 							},
@@ -437,14 +437,14 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/binders/2",
+									"raw": "{{base_url}}/api/binders/{binder_id}",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"binders",
-										"2"
+										"{binder_id}"
 									]
 								}
 							},
@@ -523,7 +523,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/binders/user/2",
+									"raw": "{{base_url}}/api/binders/user/{user_id)",
 									"host": [
 										"{{base_url}}"
 									],
@@ -531,7 +531,7 @@
 										"api",
 										"binders",
 										"user",
-										"2"
+										"{user_id)"
 									]
 								}
 							},
@@ -553,14 +553,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/binders/3",
+									"raw": "{{base_url}}/api/binders/{binder_id}",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"binders",
-										"3"
+										"{binder_id}"
 									]
 								}
 							},
@@ -582,14 +582,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/binders/2/cards",
+									"raw": "{{base_url}}/api/binders/{binder_id}/cards",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"binders",
-										"2",
+										"{binder_id}",
 										"cards"
 									]
 								}
@@ -618,7 +618,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"cardId\": \"basep-3\"\r\n}",
+									"raw": "{\r\n    \"cardId\": \"\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -626,14 +626,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/binders/2/cards",
+									"raw": "{{base_url}}/api/binders/{binder_id}/cards",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"binders",
-										"2",
+										"{binder_id}",
 										"cards"
 									]
 								}
@@ -657,7 +657,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"binderId\": 3,\r\n    \"cardId\": \"sm75-6\",\r\n    \"price\": 1.62,\r\n    \"userId\": 2,\r\n    \"preferredPriceKey\": \"normal\"\r\n}",
+									"raw": "{\r\n    \"binderId\": ,\r\n    \"cardId\": \"\",\r\n    \"price\": ,\r\n    \"userId\": ,\r\n    \"preferredPriceKey\": \"normal\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -694,16 +694,16 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/binders/2/cards/basep-3",
+									"raw": "{{base_url}}/api/binders/{binder_id}/cards/{cardId}",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"binders",
-										"2",
+										"{binder_id}",
 										"cards",
-										"basep-3"
+										"{cardId}"
 									]
 								}
 							},
@@ -725,16 +725,16 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/binders/2/sell/basep-3",
+									"raw": "{{base_url}}/api/binders/{binder_id}/sell/{cardId}",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"binders",
-										"2",
+										"{binder_id}",
 										"sell",
-										"basep-3"
+										"{cardId}"
 									]
 								}
 							},

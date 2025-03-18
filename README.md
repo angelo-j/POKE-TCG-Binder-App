@@ -3,17 +3,25 @@
 ![Example Postman View With Requests](docs/screenshots/Postman%20View.png)
 
 ## 📖 Overview
-A web application that integrates with the [Pokémon TCG API](https://pokemontcg.io/) to allow users to search for cards, manage personal binders, and conduct trades.  
+A web application that integrates with the [Pokémon TCG API](https://pokemontcg.io/) to allow users to **search for cards, manage personal binders, and conduct trades**.
 
-With this app, Pokémon Trading Card Game (TCG) collectors can easily organize their collections, track card values, and engage in a virtual trading experience.
+With this app, Pokémon Trading Card Game (TCG) collectors can **organize collections, track card values, and engage in virtual trading**.
 Users can create multiple binders to categorize their cards for deck-building, investment tracking, or general collection management.
-The marketplace feature allows authenticated users to buy and sell cards using an in-app currency system, 
-allowing either in-app currency or financial transactions to be developed in the future.
+The marketplace feature allows authenticated users to buy and sell cards using an **in-app currency system**.
+
+### 🔐 Authentication & Security
 Authentication is required for actions beyond searching, such as creating binders and buying cards.
+- **User authentication is handled via JWT tokens.**
+- Tokens are **securely generated and stored** on the client side after login.
+- **Spring Security** ensures that protected endpoints require authentication.
 
-[Koyeb Deployment Coming!]()
-[API docs]()
+## 🚀 Live Deployment (Koyeb)
+The backend is **deployed on Koyeb**, making it accessible for API calls **without running locally**.
 
+**Base API URL:**
+```plaintext
+https://sparkling-vivi-angelo-j-code-a0aad5ff.koyeb.app/
+```
 ## ⚡ Features
 - **Search for Cards 🔍**: Available to all users without authentication.
 - **User Authentication 🔒**: Required for creating binders and managing cards.
@@ -72,8 +80,8 @@ database lightweight by storing only essential attributes (ID, name, image URLs,
 - **Java** ☕
 - **Spring Boot** 🌱
 - **PostgreSQL** 🐘
-- **Pokémon TCG API**
-- **Vue.js** *(Planned for frontend)*
+- **Pokémon TCG API** 🌐
+- **Vue.js** 🖥️ *(Planned for frontend)*
 
 ## Author
 Developed by **Jordan Opst** as a backend design final project.
