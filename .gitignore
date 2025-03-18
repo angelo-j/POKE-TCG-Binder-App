@@ -35,7 +35,7 @@ node_modules
 /dist
 
 .env
-.sql
+*.sql
 
 # Eclipse
 .classpath
