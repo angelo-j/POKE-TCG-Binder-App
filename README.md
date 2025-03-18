@@ -12,7 +12,7 @@ The marketplace feature allows authenticated users to buy and sell cards using a
 ### 🔐 Authentication & Security
 Authentication is required for actions beyond searching, such as creating binders and buying cards.
 - **User authentication is handled via JWT tokens.**
-- Tokens are **securely generated and stored** on the client side after login.
+- Tokens are **securely generated and stored** on the server side after login.
 - **Spring Security** ensures that protected endpoints require authentication.
 
 ## 🚀 Live Deployment (Koyeb)
