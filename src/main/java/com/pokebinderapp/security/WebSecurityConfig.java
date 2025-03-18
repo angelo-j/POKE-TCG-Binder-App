@@ -44,8 +44,15 @@ public class WebSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(HttpMethod.OPTIONS, "/**");
+        return (web) -> web.ignoring().requestMatchers(
+                HttpMethod.OPTIONS, "/**",
+                "/", // Allow homepage
+                "/index.html", // Allow direct access to index.html
+                "/static/**", // Allow static files
+                "/css/**", "/js/**", "/images/**" // If you have assets
+        );
     }
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
