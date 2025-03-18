@@ -9,7 +9,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # ---- Step 2: Create the runtime image ----
-FROM eclipse-temurin:17-jdk-slim
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
 
 # Copy the jar from the build stage
