@@ -27,7 +27,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin
-@Tag(name = "Authentication Management", description = "Endpoints for managing user accounts.")
+@Tag(name = "Authentication Management", description = "Endpoints for logging in and registering.")
 public class AuthenticationController {
 
     private final TokenProvider tokenProvider;

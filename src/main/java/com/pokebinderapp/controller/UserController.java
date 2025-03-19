@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin
-@Tag(name = "User Management", description = "Endpoints for logging in and registering.")
+@Tag(name = "User Management", description = "Endpoints for managing user accounts.")
 public class UserController {
 
     private final UserDao userDao;
