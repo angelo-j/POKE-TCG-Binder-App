@@ -40,7 +40,9 @@ public class RegisterUserDto {
         return confirmPassword;
     }
 
-    public boolean isPasswordsMatch(){
+    // todo: Swagger registering as a field in dto
+    public boolean isPasswordsMatch() {
         return password.equals(confirmPassword);
     }
+
 }

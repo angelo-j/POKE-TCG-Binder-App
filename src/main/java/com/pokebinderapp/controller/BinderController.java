@@ -215,7 +215,7 @@ public class BinderController {
             if (!isAuthorizedUser(principal, binder.getUserId())) {
                 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access denied");
             }
-            // The user only provides the cardId. The DAO will call the Pokemon API
+            // The user only provides the cardId. The DAO will call the Pokémon API
             // to retrieve full card details and map to a BinderCardDto.
             Card card = new Card();
             card.setCardId(binderCardDto.getCardId());
