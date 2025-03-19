@@ -4,6 +4,8 @@ import com.pokebinderapp.model.dto.LoginDto;
 import com.pokebinderapp.model.dto.LoginResponseDto;
 import com.pokebinderapp.model.dto.RegisterUserDto;
 import com.pokebinderapp.model.User;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 import com.pokebinderapp.exception.DaoException;
@@ -25,6 +27,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin
+@Tag(name = "Authentication Management", description = "Endpoints for managing user accounts.")
 public class AuthenticationController {
 
     private final TokenProvider tokenProvider;
@@ -37,6 +40,8 @@ public class AuthenticationController {
         this.userDao = userDao;
     }
 
+    @Operation(summary = "Login",
+            description = "Allows users to access their account.")
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public LoginResponseDto login(@Valid @RequestBody LoginDto loginDto) {
         try {
@@ -58,6 +63,8 @@ public class AuthenticationController {
         }
     }
 
+    @Operation(summary = "Register user",
+            description = "Allows creation of new user accounts.")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public User register(@Valid @RequestBody RegisterUserDto newUser) {

@@ -2,6 +2,8 @@ package com.pokebinderapp.controller;
 
 import com.pokebinderapp.model.dto.CardDto;
 import com.pokebinderapp.services.PokemonServiceInterface;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/cards")
+@Tag(name = "Card Search", description = "Endpoints for searching and retrieving Pokémon TCG cards from the API.")
 public class CardController {
 
     private static final Logger logger = Logger.getLogger(CardController.class.getName());
@@ -26,6 +29,8 @@ public class CardController {
         this.pokemonService = pokemonService;
     }
 
+    @Operation(summary = "Search for Pokémon TCG cards",
+            description = "Allows any user to retrieve a paginated list of Pokémon TCG cards that match the search query.")
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> searchCards(
             @RequestParam String query,
@@ -48,6 +53,11 @@ public class CardController {
             // Get paginated results
             int fromIndex = (page - 1) * pageSize;
             int toIndex = Math.min(fromIndex + pageSize, totalResults);
+
+            if (fromIndex >= totalResults) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Page number out of range.");
+            }
+
             List<CardDto> paginatedCards = allCards.subList(fromIndex, toIndex);
 
             // Build response
@@ -65,7 +75,8 @@ public class CardController {
         }
     }
 
-
+    @Operation(summary = "Get a Pokémon TCG card by ID",
+            description = "Allows any user to retrieve detailed information about a specific Pokémon TCG card by its unique ID.")
     @GetMapping("/{cardId}")
     public CardDto getCardById(@PathVariable String cardId){
         try {

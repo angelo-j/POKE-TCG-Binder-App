@@ -17,8 +17,6 @@ public class RegisterUserDto {
     private String password;
     @NotEmpty
     private String confirmPassword;
-    @NotEmpty(message = "Please select a role for this user.")
-    private String role;
 
     public RegisterUserDto() {
         // Default constructor needed for JSON deserialization
@@ -28,7 +26,6 @@ public class RegisterUserDto {
         this.username = username;
         this.password = password;
         this.confirmPassword = confirmPassword;
-        this.role = role;
     }
 
     public String getUsername() {
@@ -41,10 +38,6 @@ public class RegisterUserDto {
 
     public String getConfirmPassword() {
         return confirmPassword;
-    }
-
-    public String getRole() {
-        return role;
     }
 
     public boolean isPasswordsMatch(){

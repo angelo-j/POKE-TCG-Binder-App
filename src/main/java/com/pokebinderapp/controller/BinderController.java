@@ -10,6 +10,8 @@ import com.pokebinderapp.model.dto.BinderCardDto;
 import com.pokebinderapp.model.dto.RenameBinderDto;
 import com.pokebinderapp.model.dto.BuyCardRequestDto;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/binders")
+@Tag(name = "Binder Management", description = "Endpoints for managing binders and their cards.")
 public class BinderController {
 
     private static final Logger logger = Logger.getLogger(BinderController.class.getName());
@@ -39,13 +42,12 @@ public class BinderController {
         this.userDao = userDao;
     }
 
-    // Create Binder (Authenticated user or Admin)
+    @Operation(summary = "Create a binder",
+            description = "Allows authenticated users can create binders to manage their collections.")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Binder> createBinder(@RequestBody Binder binder, Principal principal) {
         try {
-            // Optionally check that binder.getUserId() matches the authenticated user's id,
-            // unless an admin is creating the binder.
             Binder newBinder = binderDao.createBinder(binder);
             return new ResponseEntity<>(newBinder, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -53,7 +55,8 @@ public class BinderController {
         }
     }
 
-    // Create Binder for User (Admin only)
+    @Operation(summary = "Create a binder for a user",
+            description = "Allows admins to create a new binder for any user.")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/user/{username}/binders")
     public ResponseEntity<Binder> createBinderForUser(@PathVariable String username, @RequestBody Binder binder) {
@@ -70,8 +73,8 @@ public class BinderController {
         }
     }
 
-    // Simplified admin-only view of all binders
-    // Prevents massive results by clearing the list of cards first
+    @Operation(summary = "Simple binder list",
+            description = "Allows admins to retrieve information about all binders in the database, omitting cards.")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     public List<Binder> getAllBinders() {
@@ -90,7 +93,8 @@ public class BinderController {
     }
 
 
-    // Get current user's binders
+    @Operation(summary = "Get my binders",
+            description = "Allows authenticated users to see a list of current user's binders and the cards they contain.")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @GetMapping("/mine")
     public List<Binder> getMyBinders(Principal principal) {
@@ -104,7 +108,8 @@ public class BinderController {
         return binderDao.getBindersByUserId(user.getId());
     }
 
-    // Get Binder by ID (Authenticated user or Admin)
+    @Operation(summary = "Get a binder by ID",
+            description = "Allows authenticated users to retrieve detailed information about a specific binder by its unique ID.")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @GetMapping("/{binderId}")
     public Binder getBinderById(@PathVariable int binderId, Principal principal) {
@@ -123,8 +128,8 @@ public class BinderController {
         }
     }
 
-    // todo: returning 403 for admin
-    // Get Binders by User ID (Authenticated user or Admin)
+    @Operation(summary = "Get binders by user ID",
+            description = "Allows authenticated users to retrieve detailed information about binders associated with a user ID.")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @GetMapping("/user/{userId}")
     public List<Binder> getBindersByUserId(@PathVariable int userId, Principal principal) {
@@ -138,7 +143,8 @@ public class BinderController {
         }
     }
 
-    // Get Cards in Binder (Authenticated user or Admin)
+    @Operation(summary = "Get cards in a binder",
+            description = "Allows authenticated users to retrieve only the cards in a binder.")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @GetMapping("/{binderId}/cards")
     public List<Card> getCardsInBinder(@PathVariable int binderId, Principal principal) {
@@ -156,7 +162,8 @@ public class BinderController {
         }
     }
 
-    // Rename Binder (Admin only)
+    @Operation(summary = "Rename binder",
+            description = "Allows admins to rename any binder. (For correcting inappropriate binder names.)")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{binderId}")
     public ResponseEntity<Void> renameBinder(@PathVariable int binderId, @RequestBody RenameBinderDto renameBinderDto) {
@@ -171,7 +178,8 @@ public class BinderController {
         }
     }
 
-    // Delete Binder (Authenticated user or Admin)
+    @Operation(summary = "Delete binder",
+            description = "Allows authenticated users to delete a binder by binder ID.")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{binderId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -193,8 +201,9 @@ public class BinderController {
         }
     }
 
-    // todo: doesn't seem to map image url correctly
-    // Add Card to Binder (Authenticated user or Admin)
+
+    @Operation(summary = "Add a card to a binder",
+            description = "Allows authenticated users to add a card to a binder, no currency exchange.")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @PostMapping("/{binderId}/cards")
     public ResponseEntity<Void> addCardToBinder(@PathVariable int binderId, @RequestBody BinderCardDto binderCardDto, Principal principal) {
@@ -220,6 +229,8 @@ public class BinderController {
         }
     }
 
+    @Operation(summary = "Buy a card",
+            description = "Allows authenticated users to buy a card for a binder using in-app currency.")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @PostMapping("/buyCard")
     public ResponseEntity<Void> buyCardToBinder(@RequestBody BuyCardRequestDto buyRequest, Principal principal) {
@@ -241,7 +252,8 @@ public class BinderController {
         }
     }
 
-    // Remove Card from Binder (Authenticated user or Admin)
+    @Operation(summary = "Remove a card from a binder",
+            description = "Authenticated users can remove a card from a binder, no currency exchange.")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{binderId}/cards/{cardId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -263,6 +275,8 @@ public class BinderController {
         }
     }
 
+    @Operation(summary = "Sell a card from a binder",
+            description = "Allows authenticated users to sell a card at market rate from a binder.")
     @PostMapping("/{binderId}/sell/{cardId}")
     public ResponseEntity<Void> sellCardFromBinder(@PathVariable int binderId,
                                                    @PathVariable String cardId,
@@ -285,8 +299,6 @@ public class BinderController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error selling card from binder", e);
         }
     }
-
-
 
     // Utility method for checking if the authenticated user is allowed to access a binder.
     private boolean isAuthorizedUser(Principal principal, int binderOwnerId) {
