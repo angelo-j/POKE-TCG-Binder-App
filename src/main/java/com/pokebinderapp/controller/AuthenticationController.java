@@ -62,8 +62,8 @@ public class AuthenticationController {
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public User register(@Valid @RequestBody RegisterUserDto newUser) {
 
-        if(!newUser.isPasswordsMatch()){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "password and confirm password do not match");
+        if (!newUser.isPasswordsMatch()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password and confirm password do not match");
         }
 
         try {
@@ -71,16 +71,19 @@ public class AuthenticationController {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User already exists.");
             }
 
-            User user = userDao.createUser(new User(newUser.getUsername(), newUser.getPassword(), newUser.getRole()));
+            // Force role to "ROLE_USER" regardless of what is in newUser
+            User user = new User(newUser.getUsername(), newUser.getPassword(), "ROLE_USER");
+
+            user = userDao.createUser(user);
 
             // Fetch user with money after creation
             user = userDao.getUserById(user.getId());
 
             return user;
-        }
-        catch (DaoException e) {
+        } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "DAO error - " + e.getMessage());
         }
     }
+
 
 }

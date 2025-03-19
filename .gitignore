@@ -1,9 +1,42 @@
-# ignore temporary file created by Learn
-preview-curriculum.zip
-autoconfig.yaml
-#ignore thumbnails created by windows
+# ===========================
+# General System Files
+# ===========================
+.DS_Store
 Thumbs.db
-#Ignore files build by Visual Studio
+
+# ===========================
+# Environment Files
+# ===========================
+.env
+.env.local
+
+# ===========================
+# Database Files (Ignore Dumps but Keep Migrations & Test Schemas)
+# ===========================
+*.sql
+!test-schema.sql
+!test-data.sql
+
+# ===========================
+# Build & IDE Files
+# ===========================
+bin/
+obj/
+packages/
+target/
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Visual Studio
 *.obj
 *.exe
 *.pdb
@@ -11,10 +44,8 @@ Thumbs.db
 *.aps
 *.pch
 *.vspscc
-*_i.c
-*_p.c
-*.ncb
 *.suo
+*.ncb
 *.tlb
 *.tlh
 *.bak
@@ -25,62 +56,30 @@ Thumbs.db
 !TechElevator*.dll
 *.lib
 *.sbr
-bin/
-obj/
-packages/
 .vs/
 
-.DS_Store
-node_modules
-/dist
-
-.env
-# Ignore database dumps but keep test schema
-*.sql
-!test-schema.sql
-!test-data.sql
-!migrations/*.sql  # If using Flyway or Liquibase
-
-
-# Eclipse
-.classpath
-.project
-.settings
-target/
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-# .NET
-obj/
-bin/
-.vs/
-*.user
-
-# local env files
-.env.local
-.env.*.local
-
-# Log files
+# ===========================
+# Node.js
+# ===========================
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Editor directories and files
-.idea
-.vscode
+# ===========================
+# Cypress e2e Testing
+# ===========================
+cypress/screenshots/
+cypress/videos/
+tests/e2e/videos/
+tests/e2e/screenshots/
+
+# ===========================
+# Editor-Specific
+# ===========================
+.vscode/
 *.suo
 *.ntvs*
 *.njsproj
 *.sw*
 *.jfm
-
-
-# Cypress e2e Testing
-cypress/screenshots
-cypress/videos
-/tests/e2e/videos/
-/tests/e2e/screenshots/

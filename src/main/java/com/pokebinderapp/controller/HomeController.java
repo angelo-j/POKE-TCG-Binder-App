@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping("/")
-    public String home() {
-        return "index";  // Returns index.html from /static/
+    public String redirectToSwagger() {
+        return "redirect:/swagger-ui/index.html";
     }
 }

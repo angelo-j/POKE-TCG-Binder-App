@@ -30,7 +30,9 @@ public class ApiDocConfig {
         final String apiTitle = "POKE-API";
         final String securitySchemeName = "bearerAuth";
 
+        // Swagger docs
         // https://swagger.io/docs/specification/authentication/bearer-authentication/
+
         final SecurityScheme securityScheme = new SecurityScheme()
                 .name(securitySchemeName)
                 .type(SecurityScheme.Type.HTTP)

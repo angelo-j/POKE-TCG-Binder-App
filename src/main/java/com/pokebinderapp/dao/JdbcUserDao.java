@@ -16,15 +16,49 @@ import java.util.List;
 @Repository
 public class JdbcUserDao implements UserDao {
 
-
-    // todo: consolidate null check logic
-    // todo: consolidate SQL statements
-
-
     private final JdbcTemplate jdbcTemplate;
 
     public JdbcUserDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public User createUser(User newUser) {
+        if (newUser.getUsername() == null || newUser.getUsername().isBlank()) {
+            throw new DaoException("Username cannot be null or empty");
+        }
+        if (newUser.getHashedPassword() == null || newUser.getHashedPassword().isBlank()) {
+            throw new DaoException("Password cannot be null or empty");
+        }
+
+        // Instantiate the encoder
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        // Hash the raw password
+        String rawPassword = newUser.getHashedPassword();
+        String hashedPassword = passwordEncoder.encode(rawPassword);
+        newUser.setHashedPassword(hashedPassword);
+
+        String sql;
+        Object[] params;
+
+        if (newUser.getMoney() != null) {  // If money is explicitly set
+            sql = "INSERT INTO users (username, password_hash, role, money) VALUES (?, ?, ?, ?) RETURNING user_id";
+            params = new Object[]{newUser.getUsername(), newUser.getHashedPassword(), newUser.getRole(), newUser.getMoney()};
+        } else {  // Use default value for money
+            sql = "INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?) RETURNING user_id";
+            params = new Object[]{newUser.getUsername(), newUser.getHashedPassword(), newUser.getRole()};
+        }
+
+        try {
+            int newId = jdbcTemplate.queryForObject(sql, Integer.class, params);
+            newUser.setId(newId);
+            return newUser;
+        } catch (DuplicateKeyException e) {
+            throw new DaoException("Username already exists", e);
+        } catch (Exception e) {
+            throw new DaoException("Error creating user", e);
+        }
     }
 
     @Override
@@ -84,46 +118,6 @@ public class JdbcUserDao implements UserDao {
             throw new DaoException("Error updating money", e);
         }
     }
-
-    @Override
-    public User createUser(User newUser) {
-        if (newUser.getUsername() == null || newUser.getUsername().isBlank()) {
-            throw new DaoException("Username cannot be null or empty");
-        }
-        if (newUser.getHashedPassword() == null || newUser.getHashedPassword().isBlank()) {
-            throw new DaoException("Password cannot be null or empty");
-        }
-
-        // Instantiate the encoder
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-        // Hash the raw password
-        String rawPassword = newUser.getHashedPassword();
-        String hashedPassword = passwordEncoder.encode(rawPassword);
-        newUser.setHashedPassword(hashedPassword);
-
-        String sql;
-        Object[] params;
-
-        if (newUser.getMoney() != null) {  // If money is explicitly set
-            sql = "INSERT INTO users (username, password_hash, role, money) VALUES (?, ?, ?, ?) RETURNING user_id";
-            params = new Object[]{newUser.getUsername(), newUser.getHashedPassword(), newUser.getRole(), newUser.getMoney()};
-        } else {  // Use default value for money
-            sql = "INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?) RETURNING user_id";
-            params = new Object[]{newUser.getUsername(), newUser.getHashedPassword(), newUser.getRole()};
-        }
-
-        try {
-            int newId = jdbcTemplate.queryForObject(sql, Integer.class, params);
-            newUser.setId(newId);
-            return newUser;
-        } catch (DuplicateKeyException e) {
-            throw new DaoException("Username already exists", e);
-        } catch (Exception e) {
-            throw new DaoException("Error creating user", e);
-        }
-    }
-
 
     @Override
     public List<User> getUsers() {
