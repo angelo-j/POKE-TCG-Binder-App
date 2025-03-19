@@ -43,17 +43,23 @@ public class BinderController {
     }
 
     @Operation(summary = "Create a binder",
-            description = "Allows authenticated users can create binders to manage their collections.")
+            description = "Allows authenticated users to create binders to manage their collections.")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Binder> createBinder(@RequestBody Binder binder, Principal principal) {
         try {
+            int userId = userDao.findIdByUsername(principal.getName());
+
+            binder.setUserId(userId);
+            binder.setCards(new ArrayList<>()); // Ensure new binder starts with an empty card list
+
             Binder newBinder = binderDao.createBinder(binder);
             return new ResponseEntity<>(newBinder, HttpStatus.CREATED);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error creating binder", e);
         }
     }
+
 
     @Operation(summary = "Create a binder for a user",
             description = "Allows admins to create a new binder for any user.")

@@ -52,8 +52,7 @@
 - Create a binder:
     POST {{baseUrl}}/api/binders
     Body: {
-           "name": "binder name",
-           "userId": {userId}
+           "name": "binder name"
           }
     Auth: USER or ADMIN
 

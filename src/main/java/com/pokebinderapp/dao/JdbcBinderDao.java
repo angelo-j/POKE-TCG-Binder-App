@@ -4,9 +4,12 @@ import com.pokebinderapp.model.Binder;
 import com.pokebinderapp.model.Card;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +27,21 @@ public class JdbcBinderDao implements BinderDao {
 
     @Override
     public Binder createBinder(Binder binder) {
-        String sql = "INSERT INTO binder (name, user_id) VALUES (?, ?) RETURNING binder_id";
-        int newBinderId = jdbcTemplate.queryForObject(sql, Integer.class, binder.getName(), binder.getUserId());
-        binder.setBinderId(newBinderId);
-        return binder;
+        String sql = "INSERT INTO binder (name, user_id) VALUES (?, ?) RETURNING binder_id, name, user_id";
+
+        return jdbcTemplate.queryForObject(sql, new Object[]{binder.getName(), binder.getUserId()}, new RowMapper<Binder>() {
+            @Override
+            public Binder mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Binder newBinder = new Binder();
+                newBinder.setBinderId(rs.getInt("binder_id"));
+                newBinder.setName(rs.getString("name"));
+                newBinder.setUserId(rs.getInt("user_id"));
+                newBinder.setCards(new ArrayList<>());
+                return newBinder;
+            }
+        });
     }
+
 
     @Override
     public List<Binder> getAllBinders() {

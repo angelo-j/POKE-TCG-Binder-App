@@ -1,12 +1,13 @@
 package com.pokebinderapp.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Binder {
     private int binderId;
     private String name;
     private int userId;
-    private List<Card> cards;
+    private List<Card> cards= new ArrayList<>();
 
     public int getBinderId() {
         return binderId;
