@@ -1,18 +1,25 @@
-- Login:
-    POST {{baseUrl}}/api/auth/login
-    Body:  {
-            "username": "user",
-            "password": "pass"
-           }
+- Search Cards:
+    GET {{baseUrl}}/api/cards/search?query={query}
+    Auth: None
+
+- Get Card Details by Card ID:
+    GET {{baseUrl}}/api/cards/{cardId}
+    Auth: None
 
 - Register User:
     POST {{baseUrl}}/api/auth/register
     Body: {
             "username": "user",
             "password": "pass",
-            "confirmPassword": "pass",
-            "role": "ROLE_USER"
+            "confirmPassword": "pass"
           }
+
+- Login:
+    POST {{baseUrl}}/api/auth/login
+    Body:  {
+            "username": "user",
+            "password": "pass"
+           }
 
 - Get All Users:
     GET {{baseUrl}}/api/users
@@ -34,7 +41,7 @@
     PUT {{baseUrl}}/api/users/{userId}/money
     Body: (Decimal)
           {
-            150.00
+            150000000000000.00
           }
     Auth: USER or ADMIN
 
@@ -115,12 +122,3 @@
     POST {{baseUrl}}/api/binders/{binderId}/sell/{cardId}
     (One at a time)
     Auth: USER or ADMIN
-
-- Search Cards:
-    GET {{baseUrl}}/api/cards/search?query={query}
-    Auth: None
-
-- Get Card Details by Card ID:
-    GET {{baseUrl}}/api/cards/{cardId}
-    Auth: None
-

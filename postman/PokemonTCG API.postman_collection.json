@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/cards/search?query=Starmie",
+							"raw": "{{base_url}}/api/cards/search?query={search term}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -27,7 +27,7 @@
 							"query": [
 								{
 									"key": "query",
-									"value": "Starmie"
+									"value": "{search term}"
 								}
 							]
 						}
@@ -40,14 +40,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/cards/sm75-6",
+							"raw": "{{base_url}}/api/cards/{Card ID}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"cards",
-								"sm75-6"
+								"{Card ID}"
 							]
 						}
 					},
@@ -93,7 +93,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"\",\r\n    \"confirmPassword\": \"\",\r\n    \"role\": \"ROLE_USER\"\r\n}",
+							"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"\",\r\n    \"confirmPassword\": \"\",\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -131,7 +131,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{Decimal value}",
+							"raw": "{decimal value}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -226,7 +226,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/users/2",
+							"raw": "{{base_url}}/api/users/{user_id}",
 							"host": [
 								"{{base_url}}"
 							],
