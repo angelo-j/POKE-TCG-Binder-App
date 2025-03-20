@@ -1,4 +1,4 @@
-# 🃏 Pokémon TCG Binder-Building Web App 🃏
+# 🃏 Pokémon TCG Binder Web App 🃏
 
 ---
 
