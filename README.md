@@ -5,19 +5,24 @@
 ![Example Binder View in JSON](docs/screenshots/Binder%20View.png)
 
 ---
+
 ## 📖 Overview
 A web application that integrates with the [Pokémon TCG API](https://pokemontcg.io/) to allow users to **search for cards, manage personal binders, and conduct trades**.
 
 With this app, Pokémon Trading Card Game (TCG) collectors can **organize collections, track card values, and engage in virtual trading**.
 Users can create multiple binders to categorize their cards for deck-building, investment tracking, or general collection management.
 The marketplace feature allows authenticated users to buy and sell cards using an **in-app currency system**.
+
 ---
+
 ### 🔐 Authentication & Security
 Authentication is required for actions beyond searching, such as creating binders and buying cards.
 - **User authentication is handled via JWT tokens.**
 - Tokens are **securely generated and stored** on the server side after login.
 - **Spring Security** ensures that protected endpoints require authentication.
+
 ---
+
 ## 🚀 Live Deployment (Koyeb)
 The backend is **deployed on Koyeb**, making it accessible for API calls **without running locally**.  
 You can use the Postman collection in the Postman directory and/or the API documentation in the design directory to test the backend.  
@@ -27,7 +32,9 @@ You can use the Postman collection in the Postman directory and/or the API docum
 ```plaintext
 https://sparkling-vivi-angelo-j-code-a0aad5ff.koyeb.app/
 ```
+
 ---
+
 ### 🌍 Public Features (No Authentication Required)
 - **Search for Cards by Name (list) or Card ID (single) 🔍**
 
@@ -37,7 +44,9 @@ https://sparkling-vivi-angelo-j-code-a0aad5ff.koyeb.app/
 - **Trading System 💰**: Buy and sell cards using in-app currency.
 - **Pricing System 🏷️**: Fetch prices via API or set custom values.
 - **Admin Features 👀**: Admins can delete users/binders.
+
 ---
+
 ## 🌐 API Integration
 This app integrates with the Pokémon TCG API to retrieve real-time card data while keeping the
 database lightweight by storing only essential attributes (ID, name, image URLs, price).
@@ -48,6 +57,7 @@ database lightweight by storing only essential attributes (ID, name, image URLs,
 ![Database ERD](database/PokemonTcgWebAppErd.png)
 
 ---
+
 ## 🎯 Key Classes & Interfaces
 ### 📦 Models
 - `User` 👤
@@ -77,6 +87,8 @@ database lightweight by storing only essential attributes (ID, name, image URLs,
 
 ### 🛠️ Utils
 - `CardMapper` 🗺️
+
+---
 
 ## 🧪 Testing
 ### 🔹 What’s Tested?
@@ -116,11 +128,15 @@ You can run the test suite from **any Java IDE** that supports JUnit, such as In
 Simply navigate to the `test` package and run individual test classes or the full suite.
 
 ---
+
 ## 🗺️ Future Enhancements
-- **Search Improvements**: Advanced Filters: Filter by rarity, set, price range, type, or card legality.
-- **Improved Market System**: Possibly allowing direct trade between users.
+- **Advanced Search**: Filter by rarity, set, price range, type, or card legality.
+- **Improved Market System**: Allow direct trades and sales between users.
 - **Frontend Development**: A user-friendly UI for managing binders and trades.
+
+
 ---
+
 ## 🛠️ Technologies Used
 - **Java** ☕
 - **Spring Boot** 🌱
@@ -128,7 +144,9 @@ Simply navigate to the `test` package and run individual test classes or the ful
 - **Pokémon TCG API** 🌐
 - **Swagger UI** 📜
 - **Vue.js** 🖥️ *(Planned for frontend)*
+
 ---
+
 ## 👥 Contributors
 This project was created by **Jordan Opst**. Contributions are welcome!
 
