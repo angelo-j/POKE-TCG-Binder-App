@@ -91,36 +91,37 @@ database lightweight by storing only essential attributes (ID, name, image URLs,
 ---
 
 ## 🧪 Testing
-### 🔹 What’s Tested?
-The test suite includes both unit tests and integration tests, ensuring that database interactions, business logic, and API-related data transformations work as expected.
 
-✅ **DAO Integration Tests** (Database-Backed)
-- These tests interact directly with the PostgreSQL database, verifying that queries, transactions, and cascading deletions function correctly.
+### 🔹 What’s Tested?
+The test suite includes **both unit tests and integration tests**, ensuring that the **database, API, and DTOs** work as expected.
+
+✅ **DAO Integration Tests** (Database-Backed)  
+These tests interact directly with the PostgreSQL database, verifying that transactions, constraints, and cascading deletions function correctly.
 
 ✅ **User DAO** (`JdbcUserDaoTest`)
 - Retrieve users by ID and username.
 - Prevent duplicate usernames during registration.
 - Ensure correct money transactions (buying/selling cards).
 
-✅ ***Binder DAO*** (`JdbcBinderDaoTest`)
+✅ **Binder DAO** (`JdbcBinderDaoTest`)
 - Create, update, and delete binders.
 - Fetch binders by user.
 - Ensure deleting a binder removes its associated cards.
 
-✅ ***Card DAO*** (`JdbcCardDaoTest`)
+✅ **Card DAO** (`JdbcCardDaoTest`)
+
 - Add and remove cards from binders.
 - Handle buying and selling correctly.
 - Prevent purchases if a user lacks sufficient funds.
 - Prevent selling non-existent cards.
 
-✅ ***Unit Tests*** (Mocked Dependencies & Business Logic)
-- These tests use mocked services (e.g., PokemonApiService) to isolate logic without making external API calls.
+✅ **Unit Tests** (Mocked Dependencies & Business Logic)
+- These tests use mocked services (e.g., `PokemonApiService`) to verify logic without making actual API/database calls.
 
-✅ ***Mocked API Calls*** (JdbcCardDaoTest)
+✅ **Mocked API Calls** (Mockito-Driven)
 - Uses Mockito to simulate API responses when fetching card details.
-- Ensures that price calculations and transaction logic work correctly.
 
-✅ ***DTO Transformations*** (CardMapper)
+✅ **DTO Transformations** (CardMapper)
 - Ensures that database objects (Card, BinderCardDto) correctly map to API responses and vice versa.
 
 ### 🔹 Running Tests
