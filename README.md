@@ -78,13 +78,48 @@ database lightweight by storing only essential attributes (ID, name, image URLs,
 ### 🛠️ Utils
 - `CardMapper` 🗺️
 
+## 🧪 Testing
+### 🔹 What’s Tested?
+The test suite includes both unit tests and integration tests, ensuring that database interactions, business logic, and API-related data transformations work as expected.
+
+✅ **DAO Integration Tests** (Database-Backed)
+- These tests interact directly with the PostgreSQL database, verifying that queries, transactions, and cascading deletions function correctly.
+
+✅ **User DAO** (`JdbcUserDaoTest`)
+- Retrieve users by ID and username.
+- Prevent duplicate usernames during registration.
+- Ensure correct money transactions (buying/selling cards).
+
+✅ ***Binder DAO*** (`JdbcBinderDaoTest`)
+- Create, update, and delete binders.
+- Fetch binders by user.
+- Ensure deleting a binder removes its associated cards.
+
+✅ ***Card DAO*** (`JdbcCardDaoTest`)
+- Add and remove cards from binders.
+- Handle buying and selling correctly.
+- Prevent purchases if a user lacks sufficient funds.
+- Prevent selling non-existent cards.
+
+✅ ***Unit Tests*** (Mocked Dependencies & Business Logic)
+- These tests use mocked services (e.g., PokemonApiService) to isolate logic without making external API calls.
+
+✅ ***Mocked API Calls*** (JdbcCardDaoTest)
+- Uses Mockito to simulate API responses when fetching card details.
+- Ensures that price calculations and transaction logic work correctly.
+
+✅ ***DTO Transformations*** (CardMapper)
+- Ensures that database objects (Card, BinderCardDto) correctly map to API responses and vice versa.
+
+### 🔹 Running Tests
+You can run the test suite from **any Java IDE** that supports JUnit, such as IntelliJ, Eclipse, or VS Code.  
+Simply navigate to the `test` package and run individual test classes or the full suite.
 
 ---
 ## 🗺️ Future Enhancements
-- **Test Suite Updates**: Ensure unit and integration tests align with recent code changes.
-- **Pagination Improvements**: Enhance user experience when browsing large sets of cards.
-- **Frontend Development**: A user-friendly UI for managing binders and trades.
+- **Search Improvements**: Advanced Filters: Filter by rarity, set, price range, type, or card legality.
 - **Improved Market System**: Possibly allowing direct trade between users.
+- **Frontend Development**: A user-friendly UI for managing binders and trades.
 ---
 ## 🛠️ Technologies Used
 - **Java** ☕
@@ -94,8 +129,8 @@ database lightweight by storing only essential attributes (ID, name, image URLs,
 - **Swagger UI** 📜
 - **Vue.js** 🖥️ *(Planned for frontend)*
 ---
-## Author
-Developed by **Jordan Opst**.
+## 👥 Contributors
+This project was created by **Jordan Opst**. Contributions are welcome!
 
 ---
 

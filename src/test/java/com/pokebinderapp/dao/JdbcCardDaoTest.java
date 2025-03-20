@@ -109,6 +109,21 @@ public class JdbcCardDaoTest extends BaseDaoTest {
     }
 
     @Test
+    public void buyCard_NotEnoughMoney_ShouldFail() {
+        Binder binder = new Binder();
+        binder.setName("Buying Binder");
+        binder.setUserId(1);
+        binder = binderDao.createBinder(binder);
+
+        userDao.updateMoney(1, new BigDecimal("5.00")); // User has only $5
+
+        boolean bought = cardDao.buyCardToBinder(binder.getBinderId(), "xy7-54", new BigDecimal("10.00"), 1, null);
+
+        assertFalse(bought, "Expected buyCardToBinder() to fail due to insufficient funds.");
+    }
+
+
+    @Test
     public void testSellCardFromBinder_Success() {
         Binder binder = new Binder();
         binder.setName("Selling Binder");
@@ -130,4 +145,29 @@ public class JdbcCardDaoTest extends BaseDaoTest {
         assertTrue(sold);
         assertEquals(userMoneyBefore.add(card.getPrice()), userDao.getMoney(1));
     }
+
+    @Test
+    public void sellCard_NotEnoughQuantity_ShouldFail() {
+        Binder binder = new Binder();
+        binder.setName("Selling Binder");
+        binder.setUserId(1);
+        binder = binderDao.createBinder(binder);
+
+        Card card = new Card();
+        card.setCardId("xy7-54");
+        card.setName("Rayquaza-EX");
+        card.setSmallImageUrl("smallTestUrl");
+        card.setLargeImageUrl("largeTestUrl");
+        card.setPrice(new BigDecimal("15.00"));
+        card.setQuantity(1);
+        cardDao.addCardToBinder(binder.getBinderId(), card);
+
+        boolean sold = cardDao.sellCardFromBinder(binder.getBinderId(), card.getCardId(), new BigDecimal("15.00"), 1);
+        assertTrue(sold, "Selling one card should succeed.");
+
+        // Try selling again (should fail)
+        boolean soldAgain = cardDao.sellCardFromBinder(binder.getBinderId(), card.getCardId(), new BigDecimal("15.00"), 1);
+        assertFalse(soldAgain, "Selling a card without enough quantity should fail.");
+    }
+
 }

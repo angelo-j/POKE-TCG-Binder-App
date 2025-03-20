@@ -27,7 +27,7 @@ public class JdbcBinderDao implements BinderDao {
 
     @Override
     public Binder createBinder(Binder binder) {
-        String sql = "INSERT INTO binder (name, user_id) VALUES (?, ?) RETURNING binder_id, name, user_id";
+        String sql = "INSERT INTO binders (name, user_id) VALUES (?, ?) RETURNING binder_id, name, user_id";
 
         return jdbcTemplate.queryForObject(sql, new Object[]{binder.getName(), binder.getUserId()}, new RowMapper<Binder>() {
             @Override
@@ -45,7 +45,7 @@ public class JdbcBinderDao implements BinderDao {
 
     @Override
     public List<Binder> getAllBinders() {
-        String sql = "SELECT * FROM binder";
+        String sql = "SELECT * FROM binders";
         List<Binder> binders = new ArrayList<>();
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
@@ -58,7 +58,7 @@ public class JdbcBinderDao implements BinderDao {
 
     @Override
     public List<Binder> getBindersByUserId(int userId) {
-        String sql = "SELECT * FROM binder WHERE user_id = ?";
+        String sql = "SELECT * FROM binders WHERE user_id = ?";
         List<Binder> binders = new ArrayList<>();
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         while (results.next()) {
@@ -71,7 +71,7 @@ public class JdbcBinderDao implements BinderDao {
 
     @Override
     public Binder getBinderById(int binderId) {
-        String sql = "SELECT * FROM binder WHERE binder_id = ?";
+        String sql = "SELECT * FROM binders WHERE binder_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, binderId);
         if (result.next()) {
             Binder binder = mapRowToBinder(result);
@@ -83,7 +83,7 @@ public class JdbcBinderDao implements BinderDao {
 
     @Override
     public boolean updateBinderName(int binderId, String newName) {
-        String sql = "UPDATE binder SET name = ? WHERE binder_id = ?";
+        String sql = "UPDATE binders SET name = ? WHERE binder_id = ?";
         int rowsAffected = jdbcTemplate.update(sql, newName, binderId);
         return rowsAffected > 0;
     }
@@ -92,7 +92,7 @@ public class JdbcBinderDao implements BinderDao {
     public boolean deleteBinder(int binderId) {
         String deleteCardsSql = "DELETE FROM binder_cards WHERE binder_id = ?";
         jdbcTemplate.update(deleteCardsSql, binderId);
-        String deleteBinderSql = "DELETE FROM binder WHERE binder_id = ?";
+        String deleteBinderSql = "DELETE FROM binders WHERE binder_id = ?";
         int rowsAffected = jdbcTemplate.update(deleteBinderSql, binderId);
         return rowsAffected > 0;
     }

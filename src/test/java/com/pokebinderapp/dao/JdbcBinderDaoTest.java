@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,6 +35,26 @@ public class JdbcBinderDaoTest extends BaseDaoTest {
         assertNotNull(createdBinder);
         assertTrue(createdBinder.getBinderId() > 0);
     }
+
+    @Test
+    public void createBinder_DuplicateName_ShouldSucceed() {
+        Binder binder1 = new Binder();
+        binder1.setName("Test Binder");
+        binder1.setUserId(1);
+        binderDao.createBinder(binder1);
+
+        Binder binder2 = new Binder();
+        binder2.setName("Test Binder");
+        binder2.setUserId(1);
+
+        try {
+            binderDao.createBinder(binder2);
+        } catch (Exception e) {
+            fail("Creating a binder with a duplicate name should not throw an exception.");
+        }
+    }
+
+
 
     @Test
     public void getBindersByUserId_ShouldReturnList() {
@@ -76,4 +97,26 @@ public class JdbcBinderDaoTest extends BaseDaoTest {
         assertTrue(deleted);
         assertNull(binderDao.getBinderById(createdBinder.getBinderId()));
     }
+
+    @Test
+    public void deleteBinder_ShouldCascadeDeleteCards() {
+        Binder binder = new Binder();
+        binder.setName("Test Binder");
+        binder.setUserId(1);
+        binder = binderDao.createBinder(binder);
+
+        Card card = new Card();
+        card.setCardId("xy7-54");
+        card.setName("Rayquaza-EX");
+        card.setSmallImageUrl("smallTesturl");
+        card.setLargeImageUrl("largeTestUrl");
+        card.setPrice(new BigDecimal("5.00"));
+        cardDao.addCardToBinder(binder.getBinderId(), card);
+
+        binderDao.deleteBinder(binder.getBinderId());
+
+        List<Card> cards = cardDao.getCardsInBinder(binder.getBinderId());
+        assertTrue(cards.isEmpty(), "Expected binder_cards table to be empty after binder deletion.");
+    }
+
 }

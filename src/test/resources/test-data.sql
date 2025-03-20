@@ -3,11 +3,11 @@ BEGIN TRANSACTION;
 
 -- Ensure tables start fresh
 TRUNCATE TABLE binder_cards RESTART IDENTITY CASCADE;
-TRUNCATE TABLE binder RESTART IDENTITY CASCADE;
+TRUNCATE TABLE binders RESTART IDENTITY CASCADE;
 TRUNCATE TABLE users RESTART IDENTITY CASCADE;
 
 -- Reset binder_id sequence
-ALTER SEQUENCE binder_binder_id_seq RESTART WITH 1;
+ALTER SEQUENCE binders_binder_id_seq RESTART WITH 1;
 
 -- Insert test users
 INSERT INTO users (username, password_hash, role, money) VALUES
@@ -16,7 +16,7 @@ INSERT INTO users (username, password_hash, role, money) VALUES
 ('test_user3', 'hashedpassword', 'ROLE_USER', 100.00);
 
 -- Insert test binders
-INSERT INTO binder (name, user_id) VALUES
+INSERT INTO binders (name, user_id) VALUES
 ('Binder 1', 1),
 ('Binder 2', 2),
 ('Binder 3', 3);
