@@ -23,18 +23,6 @@ Authentication is required for actions beyond searching, such as creating binder
 
 ---
 
-## 🚀 Live Deployment (Koyeb)
-The backend is **deployed on Koyeb**, making it accessible for API calls **without running locally**.  
-You can use the Postman collection in the Postman directory and/or the API documentation in the design directory to test the backend.  
-[Try it with Swagger UI!](https://sparkling-vivi-angelo-j-code-a0aad5ff.koyeb.app/swagger-ui/index.html)
-
-**Base API URL:**
-```plaintext
-https://sparkling-vivi-angelo-j-code-a0aad5ff.koyeb.app/
-```
-
----
-
 ### 🌍 Public Features (No Authentication Required)
 - **Search for Cards by Name (list) or Card ID (single) 🔍**
 
